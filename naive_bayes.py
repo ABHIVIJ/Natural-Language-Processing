@@ -11,7 +11,7 @@ def getData(text):
 	train_data = []
 	element = []
 	for d in data:
-		if(d and d.find("###MEDLINE:")==-1) :		#some lines are empty in input file and some lines in test file contains ###MEDLINE:
+		if(d and ("###MEDLINE:" not in d)) :		#some lines are empty in input file and some lines in test file contains ###MEDLINE:
 			element = d.split("\t")
 			element[1] = getClass(element[1])
 
@@ -28,41 +28,26 @@ def featureCount(featureFunction, data, *arg):
 	return count			
 
 def ifPresentInDict(dictionary, word):
-	if word in dictionary:
-		return True
-	else:
-		return False
+	return word in dictionary
 
 def containsHyphen(word):
-	if(word.find("-") == -1):
-		return False
-	else:
-		return True
+	return "-" in word
 
 def ifAllCaps(word):
-	if(word.upper()):
-		return True
-	else:
-		return False
+	return word.isupper()
 
 def ifAllSmall(word):
-	if(word.lower()):
-		return True
-	else:
-		return False
+	return word.islower()
 
 def ifNumber(word):
-	if(word.lower()):
-		return True
-	else:
-		return False
+	return word.isdigit()
 
-def getDictionary(filename):
-	dictionary = (file(filename).read()).split("\r")
-	for i in range(len(dictionary)):
-		dictionary[i] = dictionary[i][1:]
+def getAddData(filename):					#manually put a space in first line of both additional data files to use this function
+	text = (file(filename).read()).split("\r")
+	for i in range(len(text)):
+		text[i] = text[i][1:]
 	#print(dictionary[:5])
-	return dictionary	
+	return text	
 
 def computeTotalCount(count, entity):
 	total = 0
@@ -116,15 +101,21 @@ def predict(word, prob_table, featureFuncList, dict_func, dictionary):
 			if(findProb(word, prob_table[i], featureFuncList[i])):
 				prob = dictSum(prob, prob_table[i])
 	#print(word, prob)	
-	return dictMaxKey(prob)	
+	return dictMaxKey(prob)
+	
+def getRow(keys):
+	row = {}
+	for k in keys:
+		row[k] = 0
+	return row
 
 def evaluate(data, prob_table, ffunc_list, dict_func, dictionary):
 	contigency_matrix = {}
-	cont_matrix_row = {"DNA":0, "RNA":0, "protein":0, "cell_type":0, "cell_line":0, "other":0}
-	contigency_matrix["predicted"] = cont_matrix_row
-	contigency_matrix["actual"] = cont_matrix_row
-	contigency_matrix["got_right"] = cont_matrix_row
-	
+	cont_matrix_row = ["DNA", "RNA", "protein", "cell_type", "cell_line", "other"]
+	contigency_matrix["predicted"] = getRow(cont_matrix_row)
+	contigency_matrix["actual"] = getRow(cont_matrix_row)
+	contigency_matrix["got_right"] = getRow(cont_matrix_row)
+
 	for e in data:
 		pred = predict(e[0], prob_table, ffunc_list, dict_func,  dictionary)
 		contigency_matrix["actual"][e[1]] += 1 
@@ -132,35 +123,55 @@ def evaluate(data, prob_table, ffunc_list, dict_func, dictionary):
 		if(e[1] == pred):	
 			contigency_matrix["got_right"][e[1]] += 1
 
-	print("Results")
+	print(contigency_matrix)
+
+	print("Results\n")
 	correct = 0
 	total = 0	
 	for e in cont_matrix_row:
 		correct += contigency_matrix["got_right"][e]
 		total += contigency_matrix["actual"][e]
-		p = (contigency_matrix["got_right"][e]*1.0)/contigency_matrix["predicted"][e]
-		r = (contigency_matrix["got_right"][e]*1.0)/contigency_matrix["actual"][e]	
-		f = (2*p*r)/(p+r)
+		print("\n")
 		print(e)
-		print(contigency_matrix["got_right"][e])
-		print(contigency_matrix["predicted"][e])
-		print(contigency_matrix["actual"][e])
-		print("Precision")
-		print(p)
-		print("Recall")
-		print(r)
-		print("F-Measure")
-		print(f)		
+		#print(contigency_matrix["got_right"][e])
+		#print(contigency_matrix["predicted"][e])
+		#print(contigency_matrix["actual"][e])
+		print("\nPrecision")
+		if(contigency_matrix["predicted"][e] != 0):
+			p = (contigency_matrix["got_right"][e]*1.0)/contigency_matrix["predicted"][e]
+			print(p)
+		else:
+			print("Undefined")
+		print("\nRecall")
+		if(contigency_matrix["actual"][e] != 0):
+			r = (contigency_matrix["got_right"][e]*1.0)/contigency_matrix["actual"][e]
+			print(r)
+		else:
+			print("Undefined")
+		print("\nF-Measure")
+		if(contigency_matrix["actual"][e] != 0 or contigency_matrix["predicted"][e] != 0):
+			f = (2.0*contigency_matrix["got_right"][e])/(contigency_matrix["actual"][e]+contigency_matrix["predicted"][e])
+			print(f)
+		else:
+			print("Undefined")		
 	
 	acc = (1.0 * correct)/total
-	print("Accuracy")
+	print("\nAccuracy")
 	print(acc)
+
+def getsubstrFeatures(text):
+	substr = text.split('\n')
+	return substr
 	
 train_data = getData(file("Genia4ER_train.txt").read())
 
 #print(train_data[:5])
 
-dictionary = getDictionary("comWord.txt")	
+dictionary = getAddData("comWord.txt")
+#print(dictionary[:10])
+
+substrFeatures = getAddData("prefix_suffix list.txt")
+#print(substrFeatures[:10])	
 
 #print(featureCount(ifPresentInDict, train_data, dictionary))
 #print(featureCount(ifAllCaps, train_data))
@@ -182,11 +193,11 @@ prob_table = getFeatureProb(train_data, ffunc_list, dict_func, dictionary)
 #print(predict("atomic", prob_table, ffunc_list, dict_func,  dictionary))
 #print(predict("and", prob_table, ffunc_list, dict_func,  dictionary))
 
-print("Evaluation on training data")
+print("\nEvaluation on training data\n")
 evaluate(train_data, prob_table, ffunc_list, dict_func, dictionary)
 
 test_data = getData(file("Genia4ER_test.txt").read())
 
-print("Evaluation on test data")
+print("\nEvaluation on test data\n")
 evaluate(test_data, prob_table, ffunc_list, dict_func, dictionary)
 
