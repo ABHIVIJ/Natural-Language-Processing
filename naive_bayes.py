@@ -11,10 +11,10 @@ def getData(text):
 	train_data = []
 	element = []
 	for d in data:
-		if d :						#some lines are empty in input file
+		if(d and d.find("###MEDLINE:")==-1) :		#some lines are empty in input file and some lines in test file contains ###MEDLINE:
 			element = d.split("\t")
 			element[1] = getClass(element[1])
-			print(element)
+
 		train_data.append(element)
 	return train_data
 
@@ -156,7 +156,7 @@ def evaluate(data, prob_table, ffunc_list, dict_func, dictionary):
 	print("Accuracy")
 	print(acc)
 	
-#train_data = getData(file("Genia4ER_train.txt").read())
+train_data = getData(file("Genia4ER_train.txt").read())
 
 #print(train_data[:5])
 
@@ -171,7 +171,7 @@ dictionary = getDictionary("comWord.txt")
 ffunc_list = [ifPresentInDict, ifAllCaps, ifAllSmall, ifNumber, containsHyphen]
 dict_func = [ifPresentInDict]
 
-#prob_table = getFeatureProb(train_data, ffunc_list, dict_func, dictionary)
+prob_table = getFeatureProb(train_data, ffunc_list, dict_func, dictionary)
 
 #print(predict("Number", prob_table, ffunc_list, dict_func,  dictionary))
 #print(predict("GR", prob_table, ffunc_list, dict_func,  dictionary))
@@ -183,7 +183,7 @@ dict_func = [ifPresentInDict]
 #print(predict("and", prob_table, ffunc_list, dict_func,  dictionary))
 
 print("Evaluation on training data")
-#evaluate(train_data, prob_table, ffunc_list, dict_func, dictionary)
+evaluate(train_data, prob_table, ffunc_list, dict_func, dictionary)
 
 test_data = getData(file("Genia4ER_test.txt").read())
 
