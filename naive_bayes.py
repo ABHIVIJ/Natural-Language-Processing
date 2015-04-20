@@ -28,7 +28,7 @@ def featureCount(featureFunction, data, *arg):
 	return count			
 
 def findEntityProb(data):	#cant directly be defined in terms of featureCount since default values are 0 for dict here
-	count = {"DNA":1, "RNA":0, "protein":0, "cell_type":0, "cell_line":0, "other":0}
+	count = {"DNA":0, "RNA":0, "protein":0, "cell_type":0, "cell_line":0, "other":0}
 	for e in data:
 		count[e[1]] += 1
 	for e in count:
