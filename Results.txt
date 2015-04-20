@@ -663,3 +663,520 @@ F-Measure
 
 Accuracy
 0.833216551463
+
+
+
+
+
+Version 5
+
+
+Evaluation on training data
+
+Contigency Matrix
+
+{'got_right': {'cell_type': 1969, 'DNA': 3182, 'RNA': 798, 'other': 384721, 'cell_line': 177, 'protein': 30959}, 'actual': {'cell_type': 15471, 'DNA': 25311, 'RNA': 2481, 'other': 401492, 'cell_line': 11218, 'protein': 55124}, 'predicted': {'cell_type': 2507, 'DNA': 4453, 'RNA': 1056, 'other': 442245, 'cell_line': 464, 'protein': 60372}}
+
+Results
+
+Entity : DNA
+
+3182
+4453
+25311
+3182
+4453
+25311
+Precision = 0.714574
+
+Recall = 0.125716
+
+F-Measure = 0.213815
+
+Entity : RNA
+
+798
+1056
+2481
+3980
+5509
+27792
+Precision = 0.755682
+
+Recall = 0.321644
+
+F-Measure = 0.451230
+
+Entity : protein
+
+30959
+60372
+55124
+34939
+65881
+82916
+Precision = 0.512804
+
+Recall = 0.561625
+
+F-Measure = 0.536105
+
+Entity : cell_type
+
+1969
+2507
+15471
+36908
+68388
+98387
+Precision = 0.785401
+
+Recall = 0.127270
+
+F-Measure = 0.219046
+
+Entity : cell_line
+
+177
+464
+11218
+37085
+68852
+109605
+Precision = 0.381466
+
+Recall = 0.015778
+
+F-Measure = 0.030303
+
+Entity : other
+
+384721
+442245
+401492
+421806
+511097
+511097
+Precision = 0.869927
+
+Recall = 0.958228
+
+F-Measure = 0.911945
+
+
+Macro Averaging
+
+Precision = 0.669976
+
+Recall = 0.351710
+
+F-Measure = 0.393741
+
+421806
+511097
+511097
+
+Micro Averaging
+
+Precision = 0.825295
+
+Recall = 0.825295
+
+F-Measure = 0.825295
+
+
+Accuracy = 0.825295
+
+
+Evaluation on test data
+
+Contigency Matrix
+
+{'got_right': {'cell_type': 521, 'DNA': 408, 'RNA': 83, 'other': 81773, 'cell_line': 24, 'protein': 5187}, 'actual': {'cell_type': 4930, 'DNA': 2859, 'RNA': 305, 'other': 86165, 'cell_line': 1496, 'protein': 9855}, 'predicted': {'cell_type': 605, 'DNA': 641, 'RNA': 142, 'other': 92366, 'cell_line': 127, 'protein': 11729}}
+
+Results
+
+Entity : DNA
+
+408
+641
+2859
+408
+641
+2859
+Precision = 0.636505
+
+Recall = 0.142707
+
+F-Measure = 0.233143
+
+Entity : RNA
+
+83
+142
+305
+491
+783
+3164
+Precision = 0.584507
+
+Recall = 0.272131
+
+F-Measure = 0.371365
+
+Entity : protein
+
+5187
+11729
+9855
+5678
+12512
+13019
+Precision = 0.442237
+
+Recall = 0.526332
+
+F-Measure = 0.480634
+
+Entity : cell_type
+
+521
+605
+4930
+6199
+13117
+17949
+Precision = 0.861157
+
+Recall = 0.105680
+
+F-Measure = 0.188257
+
+Entity : cell_line
+
+24
+127
+1496
+6223
+13244
+19445
+Precision = 0.188976
+
+Recall = 0.016043
+
+F-Measure = 0.029575
+
+Entity : other
+
+81773
+92366
+86165
+87996
+105610
+105610
+Precision = 0.885315
+
+Recall = 0.949028
+
+F-Measure = 0.916065
+
+
+Macro Averaging
+
+Precision = 0.599783
+
+Recall = 0.335320
+
+F-Measure = 0.369840
+
+87996
+105610
+105610
+
+Micro Averaging
+
+Precision = 0.833217
+
+Recall = 0.833217
+
+F-Measure = 0.833217
+
+
+Accuracy = 0.833217
+
+
+
+Version 6
+
+Evaluation on training data
+
+Contigency Matrix
+
+{'got_right': {'cell_type': 1969, 'DNA': 3182, 'RNA': 798, 'other': 384721, 'cell_line': 177, 'protein': 30959}, 'actual': {'cell_type': 15471, 'DNA': 25311, 'RNA': 2481, 'other': 401492, 'cell_line': 11218, 'protein': 55124}, 'predicted': {'cell_type': 2507, 'DNA': 4453, 'RNA': 1056, 'other': 442245, 'cell_line': 464, 'protein': 60372}}
+
+Results
+
+Entity : DNA
+
+Precision = 0.714574
+
+Recall = 0.125716
+
+F-Measure = 0.213815
+
+Entity : RNA
+
+Precision = 0.755682
+
+Recall = 0.321644
+
+F-Measure = 0.451230
+
+Entity : protein
+
+Precision = 0.512804
+
+Recall = 0.561625
+
+F-Measure = 0.536105
+
+Entity : cell_type
+
+Precision = 0.785401
+
+Recall = 0.127270
+
+F-Measure = 0.219046
+
+Entity : cell_line
+
+Precision = 0.381466
+
+Recall = 0.015778
+
+F-Measure = 0.030303
+
+Entity : other
+
+Precision = 0.869927
+
+Recall = 0.958228
+
+F-Measure = 0.911945
+
+
+Macro Averaging
+
+Precision = 0.669976
+
+Recall = 0.351710
+
+F-Measure = 0.393741
+
+
+Evaluation on test data
+
+Contigency Matrix
+
+{'got_right': {'cell_type': 521, 'DNA': 408, 'RNA': 83, 'other': 81773, 'cell_line': 24, 'protein': 5187}, 'actual': {'cell_type': 4930, 'DNA': 2859, 'RNA': 305, 'other': 86165, 'cell_line': 1496, 'protein': 9855}, 'predicted': {'cell_type': 605, 'DNA': 641, 'RNA': 142, 'other': 92366, 'cell_line': 127, 'protein': 11729}}
+
+Results
+
+Entity : DNA
+
+Precision = 0.636505
+
+Recall = 0.142707
+
+F-Measure = 0.233143
+
+Entity : RNA
+
+Precision = 0.584507
+
+Recall = 0.272131
+
+F-Measure = 0.371365
+
+Entity : protein
+
+Precision = 0.442237
+
+Recall = 0.526332
+
+F-Measure = 0.480634
+
+Entity : cell_type
+
+Precision = 0.861157
+
+Recall = 0.105680
+
+F-Measure = 0.188257
+
+Entity : cell_line
+
+Precision = 0.188976
+
+Recall = 0.016043
+
+F-Measure = 0.029575
+
+Entity : other
+
+Precision = 0.885315
+
+Recall = 0.949028
+
+F-Measure = 0.916065
+
+
+Macro Averaging
+
+Precision = 0.599783
+
+Recall = 0.335320
+
+F-Measure = 0.369840
+
+
+Version 7
+
+Added entries to prefix_suffix.txt :
+
+for cell_line : cell, line
+for cell_type : myeloid, lymphocyte, monocyte, mononuclear
+for protein : factor-kappa
+for DNA : codon, upstream, enhancer
+for RNA : replaced 'mrna' with 'mRNA'
+
+Evaluation on training data
+
+Contigency Matrix
+
+{'got_right': {'cell_type': 2260, 'DNA': 3613, 'RNA': 798, 'other': 384147, 'cell_line': 871, 'protein': 30723}, 'actual': {'cell_type': 15471, 'DNA': 25311, 'RNA': 2481, 'other': 401492, 'cell_line': 11218, 'protein': 55124}, 'predicted': {'cell_type': 3011, 'DNA': 5017, 'RNA': 1056, 'other': 440139, 'cell_line': 2650, 'protein': 59224}}
+
+Results
+
+Entity : DNA
+
+Precision = 0.720151
+
+Recall = 0.142744
+
+F-Measure = 0.238262
+
+Entity : RNA
+
+Precision = 0.755682
+
+Recall = 0.321644
+
+F-Measure = 0.451230
+
+Entity : protein
+
+Precision = 0.518759
+
+Recall = 0.557343
+
+F-Measure = 0.537360
+
+Entity : cell_type
+
+Precision = 0.750581
+
+Recall = 0.146080
+
+F-Measure = 0.244562
+
+Entity : cell_line
+
+Precision = 0.328679
+
+Recall = 0.077643
+
+F-Measure = 0.125613
+
+Entity : other
+
+Precision = 0.872786
+
+Recall = 0.956799
+
+F-Measure = 0.912863
+
+
+Macro Averaging
+
+Precision = 0.657773
+
+Recall = 0.367042
+
+F-Measure = 0.418315
+
+
+Evaluation on test data
+
+Contigency Matrix
+
+{'got_right': {'cell_type': 607, 'DNA': 436, 'RNA': 83, 'other': 81656, 'cell_line': 134, 'protein': 5151}, 'actual': {'cell_type': 4930, 'DNA': 2859, 'RNA': 305, 'other': 86165, 'cell_line': 1496, 'protein': 9855}, 'predicted': {'cell_type': 731, 'DNA': 685, 'RNA': 142, 'other': 91989, 'cell_line': 562, 'protein': 11501}}
+
+Results
+
+Entity : DNA
+
+Precision = 0.636496
+
+Recall = 0.152501
+
+F-Measure = 0.246050
+
+Entity : RNA
+
+Precision = 0.584507
+
+Recall = 0.272131
+
+F-Measure = 0.371365
+
+Entity : protein
+
+Precision = 0.447874
+
+Recall = 0.522679
+
+F-Measure = 0.482394
+
+Entity : cell_type
+
+Precision = 0.830369
+
+Recall = 0.123124
+
+F-Measure = 0.214450
+
+Entity : cell_line
+
+Precision = 0.238434
+
+Recall = 0.089572
+
+F-Measure = 0.130224
+
+Entity : other
+
+Precision = 0.887671
+
+Recall = 0.947670
+
+F-Measure = 0.916690
+
+
+Macro Averaging
+
+Precision = 0.604225
+
+Recall = 0.351279
+
+F-Measure = 0.393529

@@ -277,7 +277,7 @@ minase
 carboxylase
 chelatase
 RNA
-mrna
+mRNA
 messenger
 hift
 esis
@@ -314,3 +314,12 @@ Lymphocyte
 monocyte
 macrophage
 neutrophils	
+cell
+line
+myeloid
+lymphocyte
+mononuclear
+factor-kappa
+codon
+upstream
+enhancer

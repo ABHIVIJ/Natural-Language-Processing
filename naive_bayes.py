@@ -56,9 +56,6 @@ def containsSubstr(substr, word):
 def ifAlphaNum(word):
 	return word.isalnum()
 
-def ifPrevEntity(prev_ent, act_prev_ent):
-	return prev_ent == act_prev_ent	
-
 def getAddData(filename):			#manually put a space in first line of both additional data files to use this function
 	text = (file(filename).read()).split("\r")
 	for i in range(len(text)):
@@ -149,41 +146,76 @@ def evaluate(data, prob_table, class_prob, ffunc_list, dict_func, dictionary, su
 		if(e[1] == pred):	
 			contigency_matrix["got_right"][e[1]] += 1
 
+	print("Contigency Matrix\n")
 	print(contigency_matrix)
 
-	print("Results\n")
+	print("\nResults\n")
 	correct = 0
-	total = 0	
+	total = 0
+
+	prec_avg = 0
+	rec_avg = 0
+	f_avg = 0
+	
+	got_right_total = 0
+	actual_total = 0
+	predicted_total = 0		
+
 	for e in cont_matrix_row:
-		correct += contigency_matrix["got_right"][e]
-		total += contigency_matrix["actual"][e]
-		print("\n")
-		print(e)
+		got_right_total += contigency_matrix["got_right"][e]
+		actual_total += contigency_matrix["actual"][e]
+		predicted_total += contigency_matrix["predicted"][e]
+		print("Entity : %s\n" %e)
+
 		#print(contigency_matrix["got_right"][e])
 		#print(contigency_matrix["predicted"][e])
 		#print(contigency_matrix["actual"][e])
-		print("\nPrecision")
+
+		#print(got_right_total)
+		#print(predicted_total)
+		#print(actual_total)
+
 		if(contigency_matrix["predicted"][e] != 0):
 			p = (contigency_matrix["got_right"][e]*1.0)/contigency_matrix["predicted"][e]
-			print(p)
+			prec_avg += p
+			print("Precision = %f\n" %p)
 		else:
-			print("Undefined")
-		print("\nRecall")
+			print("Undefined\n")
+
 		if(contigency_matrix["actual"][e] != 0):
 			r = (contigency_matrix["got_right"][e]*1.0)/contigency_matrix["actual"][e]
-			print(r)
+			rec_avg += r
+			print("Recall = %f\n" %r)
 		else:
-			print("Undefined")
-		print("\nF-Measure")
+			print("Undefined\n")
+
 		if(contigency_matrix["actual"][e] != 0 or contigency_matrix["predicted"][e] != 0):
 			f = (2.0*contigency_matrix["got_right"][e])/(contigency_matrix["actual"][e]+contigency_matrix["predicted"][e])
-			print(f)
+			f_avg += f
+			print("F-Measure = %f\n" %f)
 		else:
-			print("Undefined")		
+			print("Undefined\n")		
 	
-	acc = (1.0 * correct)/total
-	print("\nAccuracy")
-	print(acc)
+	prec_avg /= len(cont_matrix_row)
+	rec_avg /= len(cont_matrix_row)
+	f_avg /= len(cont_matrix_row)
+
+	print("\nMacro Averaging\n")
+	print("Precision = %f\n" %prec_avg)
+	print("Recall = %f\n" %rec_avg)
+	print("F-Measure = %f\n" %f_avg)
+
+	p = (1.0 * got_right_total)/predicted_total
+	r = (1.0 * got_right_total)/actual_total
+	f = (2.0 * got_right_total)/(actual_total + predicted_total)
+	
+	#print("\nMicro Averaging\n")
+	#print("Precision = %f\n" %p)
+	#print("Recall = %f\n" %r)
+	#print("F-Measure = %f\n" %f)
+
+	#acc = (1.0 * got_right_total)/actual_total
+	#print("\nAccuracy = %f\n" %acc)
 
 def getsubstrFeatures(text):
 	substr = text.split('\n')
